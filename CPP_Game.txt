@@ -1,0 +1,176 @@
+#include <iostream>
+#include <string>
+#include <windows.h>
+using namespace std;
+ 
+int Guess;
+int Total;
+class Question {
+private:
+    int ansno;
+    int points;
+    string Question_Text;
+    string ans1;
+    string ans2;
+    string ans3;
+    string ans4;
+public:
+    int WriteQues(string, string,string, string,string, int, int);
+    int query();
+};
+
+void changeColor(int desiredColor){ 
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), desiredColor); 
+}
+
+int main()
+{   
+    changeColor(7);
+    changeColor(11);
+    cout << "\n\n\t\t\t\t\t\tQUIZ GAME"<< endl;
+    changeColor(14);
+    cout << "\nClick Enter to start quiz... " << endl;
+
+    cin.get();
+ 
+    string user;
+    int Age;
+
+    cout << "Please Enter your name"<< endl;
+    cin >> user;
+    cout << endl;
+ 
+    cout << "What is your age?" << endl;
+    cin >> Age;
+    cout << endl;
+ 
+    string Reply;
+    cout << user<< " type Y/N to take"<< " the quiz " << endl;
+    cin >> Reply;
+ 
+    if (Reply == "Y") {
+        cout << endl;
+        cout << "Show me what you got!" << endl;
+    }
+    else {
+        cout << "Well Too bad :(" << endl;
+        return 0;
+    }
+
+    Question nq1;Question nq2;Question nq3;Question nq4;Question nq5;Question nq6;Question nq7;Question nq8;Question nq9;Question nq10;
+
+    nq1.WriteQues("Which crop is sown on the largest area in India?: ", "wheat","maize", "rice","sugarcane", 3, 10);
+
+    nq2.WriteQues("Corey Anderson who has hit the fastest ODI century in 36 balls is from", "new zealand","west indies", "england","australia", 1, 10);
+
+    nq3.WriteQues("The world smallest country is: ", "canada","vatican city", "russia","maldives", 2, 10);
+
+    nq4.WriteQues("Novak Djokovic is a famous player associated with the game of : ", "lawn tennis","chess", "football","hockey", 1, 10);
+
+    nq5.WriteQues("which is second largest country in the world ", "india","usa", "canada","None", 3, 10);
+
+    nq6.WriteQues("which language is spoken in karnataka : ", "marathi","hindi", "kannada","malayalam", 3, 10);
+
+    nq7.WriteQues("the state which has the largest number of sugar mills in india : ", "uttar pradesh","haryana", "punjab","None", 1, 10);
+
+    nq8.WriteQues("the currency note is printed in : ", "new delhi","nasik", "bombay","lucknow", 2, 10);
+
+    nq9.WriteQues("durand cup is associated with:", "cricket","hockey", "football","volleyball", 3, 10);
+
+    nq10.WriteQues("the country which has recently joined euro zone as 18th member", "india","estonia", "latvia","plane", 3, 10);
+    
+    nq1.query();nq2.query();nq3.query();nq4.query();nq5.query();nq6.query();nq7.query();nq8.query();nq9.query();nq10.query();
+
+    cout << "Total Score = " << Total<< " out of 100" << endl;
+
+    if (Total >= 70) {
+        int initial_score;
+        initial_score=Total;
+        cout << "Congrats you qualified for the"<< " bonus round!" << endl;
+        cout<< "Now it's time to make it or break it!"<<endl;
+        Question bq1;
+        Question bq2;
+        Question bq3;
+
+        bq1.WriteQues("Which is the longest river on the earth? ", "Yangtze","Nile", "Congo","Amazon", 2, 10);
+        bq2.WriteQues("The hottest planet in the solar system? ", "Mercury","Venus", "Mars","Jupiter", 2, 10);
+        bq3.WriteQues("Smallest state of India is? ", "Sikkim","Mizoram", "Goa","Nagaland", 3, 10);
+
+        bq1.query();
+        bq2.query();
+        bq3.query();
+
+        cout << "Total Score for bonus round = " << Total-initial_score<< " out of 30\n" << endl;
+        if (Total-initial_score==30){
+            changeColor(10);
+            cout<<"AYYYYY Congratulations you won the bonus round as well\n"<<endl;
+            cout<<"Thank you for playing the quiz!"<<endl;
+            cout<<"See you next time";
+            changeColor(7);
+        }
+
+        else{
+            changeColor(10);
+            cout<<"You did not win the bonus round Better luck next time!\n"<<endl;
+            cout<<"Thank you for playing the quiz!"<<endl;
+            cout<<"See you next time"<<endl;
+            changeColor(7);
+        }
+        
+    }
+    else {
+        changeColor(10);
+        cout << "Alas! You failed the quiz."<< endl;
+        cout << "Better luck next time."<< endl;
+        changeColor(7);
+    }
+    return 0;
+}
+ 
+int Question::WriteQues(string q, string a1,string a2, string a3,string a4, int ca, int pa)
+{
+    Question_Text = q;
+    ans1 = a1;
+    ans2 = a2;
+    ans3 = a3;
+    ans4 = a4;
+    ansno = ca;
+    points = pa;
+    return 0;
+}
+ 
+int Question::query()
+{
+    cout << endl;
+    changeColor(12);
+    cout << Question_Text << endl;
+    changeColor(11);
+    cout << "1. " << ans1 << endl;
+    cout << "2. " << ans2 << endl;
+    cout << "3. " << ans3 << endl;
+    cout << "4. " << ans4 << endl;
+    cout << endl;
+ 
+    cout << "What is your answer?(in number)"<< endl;
+    cin >> Guess;
+    changeColor(14);
+
+    if (Guess == ansno) {
+        cout << endl;
+        cout << "Correct !" << endl;
+ 
+        Total = Total + points;
+        cout << "Score = " << points<< " out of "<< points<< "!" << endl;
+        cout << endl;
+    }
+ 
+    else {
+        cout << endl;
+        cout << "Wrong !" << endl;
+        cout << "Score = 0"<< " out of "<< points<< "!" << endl;
+        cout << "Correct answer = "<< ansno<< "." << endl;
+        cout << endl;
+    }
+    return 0;
+}
+
